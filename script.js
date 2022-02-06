@@ -288,7 +288,13 @@ class App {
             work => work.id === workoutEl.dataset.id
         );
 
-        this.#map.setView(workout.coords, this.#mapZoomLevel);
+        this.#map.setView(workout.coords, this.#mapZoomLevel, {
+            animate: true,
+            pan: {
+                duration: 1,
+            },
+        });
+        // workout.click();
     }
 
     _setLocalStorage() {
@@ -306,6 +312,25 @@ class App {
             this._renderWorkout(work);
         });
     }
+
+    reset() {
+        localStorage.removeItem('workouts');
+        location.reload();
+    }
 }
 
 const app = new App();
+
+
+function highAndLow(numbers){
+  const n = numbers.split(" ").map(num => parseInt(num))
+  
+  return (n.reduce((obj, curr)=>{
+    let arr = []
+    curr < obj[1] && arr[1]=curr;
+    curr > obj[0] && arr[0]=curr;
+    return arr;
+  }, [n[0], n[0]])).join(" ")
+}
+
+highAndLow("8 3 -5 42 -1 0 0 -9 4 7 4 -4")
