@@ -321,16 +321,20 @@ class App {
 
 const app = new App();
 
+function highAndLow(numbers) {
+    const n = numbers.split(' ').map(num => parseInt(num));
 
-function highAndLow(numbers){
-  const n = numbers.split(" ").map(num => parseInt(num))
-  
-  return (n.reduce((obj, curr)=>{
-    let arr = []
-    curr < obj[1] && arr[1]=curr;
-    curr > obj[0] && arr[0]=curr;
-    return arr;
-  }, [n[0], n[0]])).join(" ")
+    return n
+        .reduce(
+            (obj, curr) => {
+                let arr = [];
+                curr < obj[1] && (arr[1] = curr);
+                curr > obj[0] && (arr[0] = curr);
+                return arr;
+            },
+            [n[0], n[0]]
+        )
+        .join(' ');
 }
 
-highAndLow("8 3 -5 42 -1 0 0 -9 4 7 4 -4")
+highAndLow('8 3 -5 42 -1 0 0 -9 4 7 4 -4');
